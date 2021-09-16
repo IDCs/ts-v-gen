@@ -1,0 +1,28 @@
+{
+    "compileOnSave": true,
+    "compilerOptions": {
+        "target": "es6",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "noImplicitAny": false,
+        "removeComments": true,
+        "preserveConstEnums": true,
+        "esModuleInterop": true,
+        "strictNullChecks": true,
+        "strict": true,
+        "rootDir": "./src",
+        "outDir": "./out",
+        "resolveJsonModule": true
+    },
+    "exclude": [
+        "node_modules",
+        "src/types",
+    ],
+    "include": [
+        "./src/constants.ts",
+        "./src/util.ts",
+        "./src/schemaGenerator.ts",
+        "./src/toValidation.ts",
+        "./src/index.ts",
+    ]
+}

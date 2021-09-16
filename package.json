@@ -1,0 +1,23 @@
+{
+  "name": "ts-v-gen",
+  "version": "1.0.0",
+  "description": "Vortex's one stop shop for type validation - TypeScript interfaces to JSON schemas to standalone validation functions which can be used during runtime to validate objects and highlight any schema violations",
+  "main": "out/index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "node ./out/index.js",
+    "build": "tsc -p ."
+  },
+  "bin": {
+    "generate-validation": "./src/ts-validate.js"
+  },
+  "dependencies": {
+    "@types/node": "^16.3.2",
+    "ajv": "^8.6.1",
+    "copyfiles": "^2.4.1",
+    "lodash": "^4.17.21",
+    "shortid": "^2.2.16",
+    "ts-json-schema-generator": "^0.94.1",
+    "typescript": "^4.3.5"
+  }
+}
