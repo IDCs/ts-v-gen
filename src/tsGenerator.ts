@@ -88,6 +88,9 @@ export class ValidationFileGenerator {
   private genValidateFunctionNodes(schema: ISchemaInstanceExt): ts.FunctionDeclaration[] {
     const { factory } = ts;
     const functionDeclarations: ts.FunctionDeclaration[] = schema.refs.reduce((accum, iter) => {
+      if (!!schema?.schema['exported'] && !schema?.schema['exported'].includes(iter)) {
+        return accum;
+      }
       const functionName = factory.createIdentifier(`validate${iter}`);
       const dataIdentifier = factory.createIdentifier('data');
       const dataParameter = factory.createParameterDeclaration(

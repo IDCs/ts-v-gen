@@ -53,10 +53,12 @@ export async function generateSchema(config: tsj.Config, types: string[]) {
       : Object.keys(definitions as object).map(def => ({
           '$ref': `#/definitions/${def}`,
       }));
+    const exported = [].concat(schema['exported'] || [], iter as any);
     const formattedSchema = {
       '$schema': schema['$schema'],
       anyOf: refs,
       definitions: schema['definitions'],
+      exported,
     };
     accum = mergeDeep(accum, formattedSchema);
     return accum;

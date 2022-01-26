@@ -3,7 +3,7 @@ import { readFile, writeFile } from 'fs/promises';
 import path from 'path';
 import standaloneCode from 'ajv/dist/standalone';
 
-import { ISchemaInstance } from './types/types';
+import { ICustomKeyword, ISchemaInstance } from './types/types';
 import { SCHEMA_SUFFIX, VALIDATION_FILE_SUFFIX } from './constants';
 import { getValidationCodePath, getSchemasPath, walk } from './util';
 
@@ -18,10 +18,19 @@ export class AjvHandler {
   }
 
   private static _instance: AjvHandler;
+  private static _customKeywords: ICustomKeyword[] = [
+    { keyword: 'exported', type: 'array' }
+  ]
 
   private mAjv: Ajv;
   private constructor() {
-    this.mAjv = new Ajv({ code: { source: true }, allErrors: true, verbose: true });
+    this.mAjv = new Ajv({
+      strict: 'log',
+      code: { source: true },
+      allErrors: true,
+      verbose: true,
+      keywords: AjvHandler._customKeywords,
+    });
   }
 
   public async genValidationCode(srcPath: string, outPath: string) {
