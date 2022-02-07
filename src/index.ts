@@ -22,6 +22,7 @@ export async function generateSchemas(rootDir: string, outDir: string, tsconfig:
       tsconfig,
       path: path.resolve(path.dirname(fileEntries[0]), relPath) + '.ts',
       encodeRefs: true,
+      additionalProperties: true,
       typeValidationDir: outDir,
     };
     return generateSchema(defaultConfig, data[relPath]);

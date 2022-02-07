@@ -30,6 +30,7 @@ export class AjvHandler {
       allErrors: true,
       verbose: true,
       keywords: AjvHandler._customKeywords,
+      removeAdditional: false,
     });
   }
 
