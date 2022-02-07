@@ -2,7 +2,7 @@ import path from 'path';
 import { compileExportFile, generateSchema } from './schemaGenerator';
 import { AjvHandler } from './toValidation';
 import { TO_SCHEMA_FILE_NAME } from './constants';
-import { walk, getSchemasPath, getValidationCodePath, ensureDir } from './util';
+import { walk, getSchemasPath, getValidationCodePath, ensureDir, initExtras } from './util';
 
 export async function generateSchemas(rootDir: string, outDir: string, tsconfig: string) {
   const fileEntries: string[] = [];
@@ -34,6 +34,7 @@ export async function init(srcPath: string, outPath: string, tscPath: string, cb
     console.dir({ srcPath, schemasOut: getSchemasPath(outPath) });
     await ensureDir(getSchemasPath(outPath));
     await ensureDir(getValidationCodePath(srcPath));
+    await initExtras(srcPath);
     await generateSchemas(srcPath, outPath, tscPath);
     await AjvHandler.getInstance().genValidationCode(srcPath, outPath);
   } catch (err: any) {

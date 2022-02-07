@@ -22,6 +22,16 @@ export async function ensureDir(dirPath: string): Promise<void> {
       : Promise.reject(err));
 }
 
+export async function initExtras(outPath: string) {
+  const srcDummyFile = path.join(__dirname, 'dummy.js');
+  const destDummyFile = path.join(getValidationCodePath(outPath), 'dummy.js');
+  try {
+    await fs.copyFile(srcDummyFile, destDummyFile);
+  } catch (err) {
+    return Promise.reject(err);
+  }
+}
+
 export function getSchemasPath(outPath: string) {
 	return path.join(outPath, 'generatedSchemas');
 }

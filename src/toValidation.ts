@@ -57,7 +57,10 @@ export class AjvHandler {
       try {
         const validate = this.mAjv.compile(inst.schema);
         const moduleCode = standaloneCode(this.mAjv, validate);
-        await writeFile(inst.validateFilePath, moduleCode);
+        // This is one ugly ass hack - but we don't want any references to ajv regardless
+        //  of how compartmentalized they supposedly are.
+        const filtered = moduleCode.replace(/\"ajv\/[^)]*/gm, '"./dummy"');
+        await writeFile(inst.validateFilePath, filtered);
         tsCodeGenerator.addSchema(inst);
       } catch (err) {
         console.error(err);
