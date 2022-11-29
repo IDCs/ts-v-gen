@@ -12,7 +12,8 @@
         "strict": true,
         "rootDir": "./src",
         "outDir": "./out",
-        "resolveJsonModule": true
+        "resolveJsonModule": true,
+        "newLine": "lf"
     },
     "exclude": [
         "node_modules",
